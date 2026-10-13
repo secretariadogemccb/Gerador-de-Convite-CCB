@@ -33,12 +33,12 @@
         </div>
 
         <div class="campo">
-          <label for="congregacao">Digite a Comum Congregação</label>
+          <label for="congregacao">Comum Congregação</label>
           <input id="congregacao" name="congregacao" type="text" maxlength="85">
         </div>
 
         <div class="campo">
-          <label for="mensagem">Mensagem abaixo da Comum Congregação</label>
+          <label for="mensagem">Mensagem abaixo da foto</label>
           <input id="mensagem" name="mensagem" type="text" maxlength="210">
         </div>
 
@@ -69,6 +69,7 @@
 
         <div class="linha-inferior">
           <fieldset class="suportes">
+            <legend>Suportes</legend>
             <div class="suportes-lista">
               <label class="suporte" title="Mãos" for="suporte-maos">
                 <img src="assets/icons/maos.png" alt="Símbolo de mãos" loading="eager">
@@ -89,6 +90,10 @@
             </div>
           </fieldset>
 
+          <div class="botoes">
+            <button type="button" id="exportar" class="botao botao-principal">Salvar e Compartilhar</button>
+            <button type="button" id="limpar" class="botao botao-secundario">Limpar Campos</button>
+          </div>
         </div>
         <p class="status" id="status" role="status" aria-live="polite"></p>
       </form>
@@ -97,13 +102,26 @@
     <section class="painel-previa" aria-labelledby="titulo-previa">
       <h2 id="titulo-previa">Prévia do Convite</h2>
       <div class="moldura-previa">
-        <canvas id="flyer" width="1080" height="1920" role="img" aria-label="Prévia do convite, atualizada conforme o formulário"></canvas>
+        <canvas id="flyer" width="1080" height="1920" tabindex="0" role="img" aria-label="Prévia do convite. Após carregar a foto, arraste-a para mudar o enquadramento ou use as setas do teclado."></canvas>
       </div>
-      <p class="detalhe-exportacao">Imagem JPG · 1080 × 1920 px</p>
-      <div class="botoes">
-        <button type="button" id="exportar" class="botao botao-principal">Baixar Convite</button>
-        <button type="button" id="limpar" class="botao botao-secundario">Limpar Campos</button>
-      </div>
+      <fieldset class="ajustes-foto" id="ajustes-foto" disabled>
+        <legend><span aria-hidden="true">✥</span> Ajustar a foto da igreja</legend>
+        <p class="ajustes-ajuda" id="ajustes-ajuda">Envie uma foto para habilitar o tamanho e o enquadramento.</p>
+        <div class="ajuste-item">
+          <div class="ajuste-topo"><label for="foto-largura">Largura</label><output id="valor-largura" for="foto-largura">100%</output></div>
+          <input type="range" id="foto-largura" min="55" max="110" step="1" value="100" aria-label="Largura da foto no convite">
+        </div>
+        <div class="ajuste-item">
+          <div class="ajuste-topo"><label for="foto-altura">Altura</label><output id="valor-altura" for="foto-altura">603 px</output></div>
+          <input type="range" id="foto-altura" min="320" max="780" step="1" value="603" aria-label="Altura da foto no convite">
+        </div>
+        <div class="ajuste-item">
+          <div class="ajuste-topo"><label for="foto-zoom">Zoom</label><output id="valor-zoom" for="foto-zoom">100%</output></div>
+          <input type="range" id="foto-zoom" min="100" max="250" step="1" value="100" aria-label="Ampliação da fotografia">
+        </div>
+        <button type="button" class="botao-restaurar" id="restaurar-foto">Restaurar tamanho e posição</button>
+      </fieldset>
+      <p class="detalhe-exportacao">Imagem JPG · 1080 × 1920 px · A foto ajustada será mantida no download</p>
     </section>
   </main>
 </body>
