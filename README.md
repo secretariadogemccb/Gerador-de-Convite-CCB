@@ -71,6 +71,3 @@ gerador-convites-ccb/
 │   └── ServidorLocal.java
 └── README.md
 ```
-
-As fontes usam Google Fonts quando há internet e recorrem a fontes locais quando o serviço estiver indisponível. Nenhuma dependência de JavaScript externa é necessária.
-
