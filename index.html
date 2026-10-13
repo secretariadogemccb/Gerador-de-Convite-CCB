@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Gerador de convites digitais CCB com prévia em tempo real e exportação JPG.">
+  <title>Gerador de Convites CCB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main class="pagina">
+    <section class="painel-formulario" aria-labelledby="titulo-gerador">
+      <header class="faixa-titulo">
+        <h1 id="titulo-gerador">Gerador de Convites CCB</h1>
+      </header>
+
+      <form id="form-convite" autocomplete="off" novalidate>
+        <div class="campo">
+          <label for="titulo">Título Principal</label>
+          <input id="titulo" name="titulo" type="text" maxlength="125">
+        </div>
+
+        <div class="campo campo-foto">
+          <label for="foto">Escolha a Foto da Igreja</label>
+          <input class="sr-only" id="foto" name="foto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+          <label class="botao-upload" for="foto" tabindex="0" id="botao-upload">Upload</label>
+          <small id="foto-info" class="foto-info" aria-live="polite"></small>
+        </div>
+
+        <div class="campo">
+          <label for="congregacao">Digite a Comum Congregação</label>
+          <input id="congregacao" name="congregacao" type="text" maxlength="85">
+        </div>
+
+        <div class="campo">
+          <label for="mensagem">Mensagem abaixo da Comum Congregação</label>
+          <input id="mensagem" name="mensagem" type="text" maxlength="210">
+        </div>
+
+        <div class="linha-campos">
+          <div class="campo">
+            <label for="data">Data do Evento</label>
+            <input id="data" name="data" type="date" lang="pt-BR">
+          </div>
+          <div class="campo">
+            <label for="dia">Dia da Semana</label>
+            <input id="dia" name="dia" type="text" maxlength="32">
+          </div>
+          <div class="campo">
+            <label for="hora">Horário</label>
+            <input id="hora" name="hora" type="time" lang="pt-BR">
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="endereco">Endereço da Igreja</label>
+          <input id="endereco" name="endereco" type="text" maxlength="210">
+        </div>
+
+        <div class="campo">
+          <label for="rodape">Rodapé</label>
+          <input id="rodape" name="rodape" type="text" maxlength="145">
+        </div>
+
+        <div class="linha-inferior">
+          <fieldset class="suportes">
+            <div class="suportes-lista">
+              <label class="suporte" title="Mãos" for="suporte-maos">
+                <img src="assets/icons/maos.png" alt="Símbolo de mãos" loading="eager">
+                <input id="suporte-maos" type="checkbox" name="suportes" value="maos" aria-label="Adicionar símbolo de mãos">
+              </label>
+              <label class="suporte" title="Inclusão" for="suporte-sistema">
+                <img src="assets/icons/sistema.png" alt="Símbolo de inclusão" loading="eager">
+                <input id="suporte-sistema" type="checkbox" name="suportes" value="sistema" aria-label="Adicionar símbolo de inclusão">
+              </label>
+              <label class="suporte" title="EBI" for="suporte-ebi">
+                <img src="assets/icons/ebi.png" alt="Logo EBI" loading="eager">
+                <input id="suporte-ebi" type="checkbox" name="suportes" value="ebi" aria-label="Adicionar logo EBI">
+              </label>
+              <label class="suporte" title="Autismo" for="suporte-autismo">
+                <img src="assets/icons/autismo.png" alt="Logo do autismo enviado" loading="eager">
+                <input id="suporte-autismo" type="checkbox" name="suportes" value="autismo" aria-label="Adicionar logo do autismo">
+              </label>
+            </div>
+          </fieldset>
+
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="painel-previa" aria-labelledby="titulo-previa">
+      <h2 id="titulo-previa">Prévia do Convite</h2>
+      <div class="moldura-previa">
+        <canvas id="flyer" width="1080" height="1920" role="img" aria-label="Prévia do convite, atualizada conforme o formulário"></canvas>
+      </div>
+      <p class="detalhe-exportacao">Imagem JPG · 1080 × 1920 px</p>
+      <div class="botoes">
+        <button type="button" id="exportar" class="botao botao-principal">Baixar Convite</button>
+        <button type="button" id="limpar" class="botao botao-secundario">Limpar Campos</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
