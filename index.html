@@ -21,7 +21,7 @@
 
       <form id="form-convite" autocomplete="off" novalidate>
         <div class="campo">
-          <label for="titulo">Título Principal</label>
+          <label for="titulo">Digite o Santo Serviço</label>
           <input id="titulo" name="titulo" type="text" maxlength="125">
         </div>
 
@@ -33,7 +33,7 @@
         </div>
 
         <div class="campo">
-          <label for="congregacao">Comum Congregação</label>
+          <label for="congregacao">Local do Evento</label>
           <input id="congregacao" name="congregacao" type="text" maxlength="85">
         </div>
 
@@ -49,7 +49,7 @@
           </div>
           <div class="campo">
             <label for="dia">Dia da Semana</label>
-            <input id="dia" name="dia" type="text" maxlength="32">
+            <input id="dia" name="dia" type="text" maxlength="30">
           </div>
           <div class="campo">
             <label for="hora">Horário</label>
@@ -58,12 +58,12 @@
         </div>
 
         <div class="campo">
-          <label for="endereco">Endereço da Igreja</label>
+          <label for="endereco">Endereço do Evento</label>
           <input id="endereco" name="endereco" type="text" maxlength="210">
         </div>
 
         <div class="campo">
-          <label for="rodape">Rodapé</label>
+          <label for="rodape">Informações no Rodapé</label>
           <input id="rodape" name="rodape" type="text" maxlength="145">
         </div>
 
@@ -99,7 +99,7 @@
         <canvas id="flyer" width="1080" height="1920" tabindex="0" role="img" aria-label="Prévia do convite. Após carregar a foto, arraste-a para mudar o enquadramento ou use as setas do teclado."></canvas>
       </div>
       <fieldset class="ajustes-foto" id="ajustes-foto" disabled>
-        <legend><span aria-hidden="true">✥</span> Ajustar a foto da igreja</legend>
+        <legend><span aria-hidden="true"></span> Ajustar a foto da igreja</legend>
         <p class="ajustes-ajuda" id="ajustes-ajuda">Envie uma foto para habilitar o tamanho e o enquadramento.</p>
         <div class="ajuste-item">
           <div class="ajuste-topo"><label for="foto-largura">Largura</label><output id="valor-largura" for="foto-largura">100%</output></div>
@@ -115,8 +115,10 @@
         </div>
         <button type="button" class="botao-restaurar" id="restaurar-foto">Restaurar tamanho e posição</button>
       </fieldset>
+      <h2>  </h2>
       <div class="botoes">
-        <h2>  </h2>
+
+
         <button type="button" id="exportar" class="botao botao-principal">Salvar e Compartilhar</button>
         <button type="button" id="limpar" class="botao botao-secundario">Limpar Campos</button>
       </div>
