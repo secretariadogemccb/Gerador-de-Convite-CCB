@@ -10,6 +10,9 @@ const status = document.querySelector('#status');
 const fileInput = document.querySelector('#foto');
 const fileInfo = document.querySelector('#foto-info');
 const exportButton = document.querySelector('#exportar');
+const backgroundColorInput = document.querySelector('#cor-fundo');
+const backgroundColorHex = document.querySelector('#cor-fundo-hex');
+const backgroundResetButton = document.querySelector('#cor-fundo-padrao');
 const inputs = Object.fromEntries(
   ['titulo', 'congregacao', 'mensagem', 'data', 'dia', 'hora', 'endereco', 'rodape']
     .map(name => [name, document.getElementById(name)])
@@ -199,6 +202,7 @@ function readValues() {
     time: inputs.hora.value,
     address: inputs.endereco.value.trim().toLocaleUpperCase('pt-BR'),
     footer: inputs.rodape.value.trim(),
+    backgroundColor: backgroundColorInput.value,
     supports: selectedSupports()
   };
 }
@@ -207,7 +211,7 @@ function drawFlyer() {
   // 1. Medidas lógicas do desenho em 1080 px de largura.
   const v = readValues();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
-  ctx.fillStyle = '#fff';
+  ctx.fillStyle = v.backgroundColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const title = layoutText(v.title, { size: 128, min: 47, maxWidth: 950, maxLines: 5, weight: 900, lh: 0.97 });
@@ -330,6 +334,19 @@ for (const [key, input] of Object.entries(inputs)) {
   });
 }
 inputs.data.addEventListener('change', updateWeekday);
+// Paleta de cores nativa (RGB completo): altera o fundo da prévia e do JPG.
+function updateBackgroundColor() {
+  backgroundColorHex.textContent = backgroundColorInput.value.toUpperCase();
+  notify();
+  drawFlyer();
+}
+backgroundColorInput.addEventListener('input', updateBackgroundColor);
+backgroundColorInput.addEventListener('change', updateBackgroundColor);
+backgroundResetButton.addEventListener('click', () => {
+  backgroundColorInput.value = '#ffffff';
+  updateBackgroundColor();
+});
+
 for (const checkbox of document.querySelectorAll('input[name="suportes"]')) {
   checkbox.addEventListener('change', () => { notify(); drawFlyer(); });
 }
@@ -458,6 +475,7 @@ document.getElementById('botao-upload').addEventListener('keydown', event => {
 document.getElementById('limpar').addEventListener('click', () => {
   uploadRevision++;
   form.reset();
+  backgroundColorHex.textContent = backgroundColorInput.value.toUpperCase();
   churchPhoto = null;
   fileInput.value = '';
   fileInfo.textContent = '';

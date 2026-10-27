@@ -177,3 +177,23 @@ img { max-width: 100%; display: block; }
     text-align: center;
   }
 }
+
+/* Paleta completa de fundo do convite: responsiva e acessível. */
+.campo-cor-fundo { align-items: center; gap: 8px; }
+.seletor-cor-fundo { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; width: 100%; }
+.campo-cor-fundo .seletor-cor-fundo input[type="color"] {
+  appearance: auto; -webkit-appearance: auto; box-sizing: border-box;
+  flex: 0 0 94px; width: 94px; height: 48px; padding: 4px;
+  border-radius: 12px; border: 1.5px solid #c9c9c9; background: #fff;
+  cursor: pointer; min-width: 0; text-align: initial;
+}
+.campo-cor-fundo input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+.campo-cor-fundo input[type="color"]::-webkit-color-swatch { border: 1px solid #bbb; border-radius: 7px; }
+#cor-fundo-hex { font-weight: 800; font-size: 18px; font-family: Arial, sans-serif; color: #444; }
+.botao-cor-padrao { min-height: 42px; border-radius: 22px; padding: 5px 17px; border: 1.5px solid #aaa; background: #fff; color: #555; font-weight: 800; cursor: pointer; }
+.botao-cor-padrao:hover, .botao-cor-padrao:focus-visible { background: #eee; }
+.cor-ajuda { color: #777; text-align: center; font-size: 13px; line-height: 1.4; }
+@media (max-width: 760px) {
+  .campo-cor-fundo .seletor-cor-fundo input[type="color"] { flex-basis: 110px; width: 110px; height: 52px; }
+  .botao-cor-padrao { font-size: 16px; }
+}

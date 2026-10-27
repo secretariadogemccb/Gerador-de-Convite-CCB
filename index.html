@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261017">
-  <script defer src="app.js?v=20261017"></script>
+  <link rel="stylesheet" href="styles.css?v=20261027">
+  <script defer src="app.js?v=20261027"></script>
 </head>
 <body>
   <main class="pagina">
@@ -74,6 +74,16 @@
         <div class="campo">
           <label for="rodape">Informações no Rodapé</label>
           <input id="rodape" name="rodape" type="text" maxlength="145">
+        </div>
+
+        <div class="campo campo-cor-fundo">
+          <label for="cor-fundo">Cor de Fundo do Convite</label>
+          <div class="seletor-cor-fundo">
+            <input id="cor-fundo" name="cor-fundo" type="color" value="#ffffff" aria-label="Abrir paleta completa de cores do fundo">
+            <output id="cor-fundo-hex" for="cor-fundo">#FFFFFF</output>
+            <button type="button" id="cor-fundo-padrao" class="botao-cor-padrao">Restaurar branco</button>
+          </div>
+          <small class="cor-ajuda">Toque na cor para abrir a paleta e escolher qualquer tonalidade.</small>
         </div>
 
         <div class="linha-inferior">
