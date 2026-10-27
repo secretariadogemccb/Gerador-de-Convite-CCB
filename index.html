@@ -76,6 +76,20 @@
           <input id="rodape" name="rodape" type="text" maxlength="145">
         </div>
 
+        <div class="campo campo-imagem-fundo">
+          <label for="imagem-fundo">Adicionar imagem de fundo</label>
+          <input id="imagem-fundo" name="imagem-fundo" type="file" accept="image/png,image/jpeg,image/webp,image/gif" aria-describedby="imagem-fundo-ajuda">
+          <small id="imagem-fundo-ajuda" class="cor-ajuda">Selecione JPG, PNG ou WEBP (até 10 MB). A imagem ocupará o fundo inteiro, atrás dos textos e da foto da igreja.</small>
+          <div class="ajuste-opacidade">
+            <div class="ajuste-topo"><label for="opacidade-imagem-fundo">Opacidade da imagem de fundo</label><output id="opacidade-imagem-fundo-valor" for="opacidade-imagem-fundo">100%</output></div>
+            <input id="opacidade-imagem-fundo" type="range" min="0" max="100" step="1" value="100" disabled>
+            <small class="cor-ajuda">0%: apenas a cor de fundo · 100%: imagem totalmente visível.</small>
+          </div>
+          <button type="button" id="remover-imagem-fundo" class="botao-cor-padrao" disabled>Remover imagem de fundo</button>
+          <small id="imagem-fundo-info" class="cor-ajuda" role="status"></small>
+        </div>
+
+
         <div class="campo campo-cor-fundo">
           <label for="cor-fundo">Cor de Fundo do Convite</label>
           <div class="seletor-cor-fundo">

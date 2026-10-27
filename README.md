@@ -47,3 +47,6 @@ Alguns aplicativos guardam a imagem de compartilhamento em cache. Após publicar
 - Indicador hexadecimal, botão **Restaurar branco** e redefinição ao clicar em **Limpar**.
 - Campo responsivo para computador e celular; padrão permanece branco.
 - Publicação: atualizar `index.html`, `app.js`, `styles.css` no GitHub Pages.
+
+### Imagem de fundo e opacidade
+Abaixo de **Informações no Rodapé**, carregue uma imagem de fundo JPG, PNG ou WEBP (até 10 MB). Ajuste sua opacidade de 0% a 100% para misturar com a **Cor de Fundo do Convite**. A imagem cobre todo o convite, mantendo proporções, e aparece tanto na prévia quanto no JPG exportado. **Remover imagem de fundo** restaura o fundo apenas com a cor escolhida.

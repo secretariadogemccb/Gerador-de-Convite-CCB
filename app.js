@@ -13,6 +13,13 @@ const exportButton = document.querySelector('#exportar');
 const backgroundColorInput = document.querySelector('#cor-fundo');
 const backgroundColorHex = document.querySelector('#cor-fundo-hex');
 const backgroundResetButton = document.querySelector('#cor-fundo-padrao');
+const backgroundImageInput = document.querySelector('#imagem-fundo');
+const backgroundOpacityInput = document.querySelector('#opacidade-imagem-fundo');
+const backgroundOpacityOutput = document.querySelector('#opacidade-imagem-fundo-valor');
+const backgroundImageRemove = document.querySelector('#remover-imagem-fundo');
+const backgroundImageInfo = document.querySelector('#imagem-fundo-info');
+let backgroundImage = null;
+let backgroundUploadRevision = 0;
 const inputs = Object.fromEntries(
   ['titulo', 'congregacao', 'mensagem', 'data', 'dia', 'hora', 'endereco', 'rodape']
     .map(name => [name, document.getElementById(name)])
@@ -213,6 +220,18 @@ function drawFlyer() {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.fillStyle = v.backgroundColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // A imagem é desenhada atrás de todos os elementos e mesclada à cor selecionada.
+  // O mesmo canvas é usado na prévia e na exportação JPG.
+  if (backgroundImage) {
+    const iw = backgroundImage.naturalWidth || backgroundImage.width;
+    const ih = backgroundImage.naturalHeight || backgroundImage.height;
+    const scale = Math.max(canvas.width / iw, canvas.height / ih);
+    const w = iw * scale, h = ih * scale;
+    ctx.save();
+    ctx.globalAlpha = Number(backgroundOpacityInput.value) / 100;
+    ctx.drawImage(backgroundImage, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+    ctx.restore();
+  }
 
   const title = layoutText(v.title, { size: 128, min: 47, maxWidth: 950, maxLines: 5, weight: 900, lh: 0.97 });
   const congregation = layoutText(v.congregation, { size: 83, min: 41, maxWidth: 935, maxLines: 3, weight: 800, lh: 1.0 });
@@ -334,6 +353,49 @@ for (const [key, input] of Object.entries(inputs)) {
   });
 }
 inputs.data.addEventListener('change', updateWeekday);
+// Imagem de fundo independente da foto da igreja, com controle de opacidade.
+backgroundImageInput.addEventListener('change', async () => {
+  const revision = ++backgroundUploadRevision;
+  const file = backgroundImageInput.files?.[0];
+  if (!file) return;
+  if (!['image/png', 'image/jpeg', 'image/webp', 'image/gif'].includes(file.type) || file.size > 10 * 1024 * 1024) {
+    backgroundImageInput.value = '';
+    notify('Selecione uma imagem JPG, PNG ou WEBP de até 10 MB.');
+    return;
+  }
+  const url = URL.createObjectURL(file);
+  try {
+    const image = await loadImage(url);
+    if (revision !== backgroundUploadRevision) return;
+    backgroundImage = image;
+    backgroundOpacityInput.disabled = false;
+    backgroundImageRemove.disabled = false;
+    backgroundImageInfo.textContent = file.name;
+    notify();
+    drawFlyer();
+  } catch {
+    if (revision === backgroundUploadRevision) notify('Não foi possível abrir a imagem de fundo.');
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+});
+backgroundOpacityInput.addEventListener('input', () => {
+  backgroundOpacityOutput.textContent = `${backgroundOpacityInput.value}%`;
+  drawFlyer();
+});
+function clearBackgroundImage() {
+  backgroundUploadRevision++;
+  backgroundImage = null;
+  backgroundImageInput.value = '';
+  backgroundImageInfo.textContent = '';
+  backgroundOpacityInput.value = '100';
+  backgroundOpacityOutput.textContent = '100%';
+  backgroundOpacityInput.disabled = true;
+  backgroundImageRemove.disabled = true;
+  drawFlyer();
+}
+backgroundImageRemove.addEventListener('click', clearBackgroundImage);
+
 // Paleta de cores nativa (RGB completo): altera o fundo da prévia e do JPG.
 function updateBackgroundColor() {
   backgroundColorHex.textContent = backgroundColorInput.value.toUpperCase();
@@ -475,6 +537,7 @@ document.getElementById('botao-upload').addEventListener('keydown', event => {
 document.getElementById('limpar').addEventListener('click', () => {
   uploadRevision++;
   form.reset();
+  clearBackgroundImage();
   backgroundColorHex.textContent = backgroundColorInput.value.toUpperCase();
   churchPhoto = null;
   fileInput.value = '';

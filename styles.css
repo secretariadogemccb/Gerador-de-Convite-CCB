@@ -197,3 +197,31 @@ img { max-width: 100%; display: block; }
   .campo-cor-fundo .seletor-cor-fundo input[type="color"] { flex-basis: 110px; width: 110px; height: 52px; }
   .botao-cor-padrao { font-size: 16px; }
 }
+
+/* Upload de imagem de fundo com opacidade independente da cor base. */
+.campo-imagem-fundo { align-items: stretch; gap: 9px; }
+.campo-imagem-fundo > label { text-align: center; }
+.campo-imagem-fundo input[type="file"] { width: 100%; max-width: 100%; min-height: 48px; font-size: 15px; padding: 9px; border: 1px solid #c9c9c9; border-radius: 12px; background: #fff; }
+.campo-imagem-fundo input[type="file"]::file-selector-button { border: 0; border-radius: 20px; padding: 8px 12px; margin-right: 8px; background: #77787c; color: #fff; cursor: pointer; }
+.campo-imagem-fundo .cor-ajuda { display: block; text-align: center; overflow-wrap: anywhere; }
+.ajuste-opacidade { width: 100%; padding: 13px; border: 1px solid #ddd; border-radius: 12px; background: #fafafa; }
+.ajuste-opacidade .ajuste-topo { font-size: 16px; flex-wrap: wrap; align-items: center; }
+.ajuste-opacidade input[type="range"] { width: 100%; display: block; min-height: 35px; cursor: pointer; accent-color: #77787c; }
+.ajuste-opacidade input[type="range"]:disabled { cursor: not-allowed; opacity: .5; }
+.campo-imagem-fundo .botao-cor-padrao:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Alinhamento centralizado dos controles de plano de fundo, inclusive no iPhone. */
+.campo-imagem-fundo, .campo-cor-fundo { width: 100%; align-items: center; text-align: center; }
+.campo-imagem-fundo > label, .campo-cor-fundo > label { display: block; width: 100%; text-align: center; }
+.campo-imagem-fundo input[type="file"] { display: block; width: min(100%, 530px); margin-inline: auto; text-align: center; }
+.campo-imagem-fundo > .cor-ajuda { width: 100%; text-align: center; }
+.campo-imagem-fundo .ajuste-opacidade { width: min(100%, 530px); margin-inline: auto; text-align: center; }
+.campo-imagem-fundo .ajuste-opacidade .ajuste-topo { justify-content: center; gap: 12px; text-align: center; }
+.campo-imagem-fundo .ajuste-opacidade .ajuste-topo label { text-align: center; }
+.campo-imagem-fundo #remover-imagem-fundo { display: block; width: min(100%, 530px); margin-inline: auto; text-align: center; }
+.campo-cor-fundo .seletor-cor-fundo { justify-content: center; margin-inline: auto; }
+.campo-cor-fundo .cor-ajuda { width: 100%; text-align: center; }
+@media (max-width: 480px) {
+  .campo-imagem-fundo .ajuste-opacidade .ajuste-topo { flex-direction: column; gap: 4px; }
+  .campo-cor-fundo .seletor-cor-fundo { gap: 10px; }
+}
